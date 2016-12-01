@@ -13,17 +13,14 @@ public class Server {
         Scanner scanner = null;
 
         try {
-            scanner = new Scanner(new File("C:\\Users\\Thomas\\IdeaProjects\\Server\\src\\ExternalRegister.csv"));
+            scanner = new Scanner(new File("ExternalRegister.csv"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
 
         while(scanner.hasNext()){
-            //externalContacts.replace(',',' ');
                 externalContacts += scanner.nextLine().replace(',',' ') + "\n";
-
-                //System.out.println(externalContacts);
     }
     //scanner.close();
     return externalContacts;
