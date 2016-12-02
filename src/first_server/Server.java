@@ -3,6 +3,7 @@ package first_server;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.Scanner;
 
 public class Server {
@@ -54,19 +55,21 @@ public class Server {
 
                                             writer.println(loadContacts());
 
-                                            writer.flush();
+
                                             System.out.println("contacts sent to addressbook");
                                         }
                                         if (line.equals("exit")) {
                                             break;
                                         }
+                                        writer.flush();
                                     }
 
                                     reader.close();
                                     writer.close();
                                     clientSocket.close();
+                                }catch(SocketException e){
+                                    System.out.println("Connection to Address Book lost");
                                 } catch (Exception e) {
-
                                     e.printStackTrace();
                                 }
                             }
@@ -76,7 +79,7 @@ public class Server {
 
             }
 
-        } catch (Exception e) {
+        }catch (Exception e) {
             e.printStackTrace();
         }
     }
