@@ -8,12 +8,21 @@ import java.util.Scanner;
 
 public class Server {
 
+    private String fileName;
+    private int serverPort;
+
+
+    public Server(String fileName, int serverPort) {
+        this.fileName = fileName;
+        this.serverPort = serverPort;
+    }
+
     public String loadContacts() {
         String externalContacts = "";
         Scanner scanner = null;
 
         try {
-            scanner = new Scanner(new File("ExternalRegister.csv"));
+            scanner = new Scanner(new File(fileName));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -24,9 +33,9 @@ public class Server {
         return externalContacts;
     }
 
-    public void serverTest() {
+    public void serverHandler() {
         try {
-            ServerSocket serverSocket = new ServerSocket(61616);
+            ServerSocket serverSocket = new ServerSocket(serverPort);
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 new Thread(
@@ -42,7 +51,7 @@ public class Server {
                                     BufferedReader reader = new BufferedReader(inputStreamReader);
 
                                     for (String line = reader.readLine(); line != null; line = reader.readLine()) {
-                                        if (line.equals("getAll")) {
+                                        if (line.equals("getall")) {
                                             writer.println(loadContacts());
                                             System.out.println("Contacts sent to Address Book.");
                                         }
