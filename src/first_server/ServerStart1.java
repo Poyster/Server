@@ -6,6 +6,5 @@ public class ServerStart1 {
 
         Server server = new Server("ExternalRegister.csv", 61616);
         server.serverHandler();
-
     }
 }
