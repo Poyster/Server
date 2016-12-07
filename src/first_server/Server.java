@@ -57,7 +57,7 @@ public class Server {
                                             writer.flush();
                                         }
                                         if (line.equals("exit")) {
-                                            System.out.println("Server task finished, closing down connection.");
+                                            System.out.println("Server task finished, closing down connection to client.");
                                             reader.close();
                                             writer.close();
                                             clientSocket.close();
