@@ -54,15 +54,16 @@ public class Server {
                                         if (line.equals("getall")) {
                                             writer.println(loadContacts());
                                             System.out.println("Contacts sent to Address Book.");
+                                            writer.flush();
                                         }
                                         if (line.equals("exit")) {
+                                            System.out.println("Server task finished, closing down connection.");
+                                            reader.close();
+                                            writer.close();
+                                            clientSocket.close();
                                             break;
                                         }
-                                        writer.flush();
                                     }
-                                    reader.close();
-                                    writer.close();
-                                    clientSocket.close();
                                 } catch (SocketException e) {
                                     System.out.println("Connection to Address Book lost.");
                                 } catch (Exception e) {
